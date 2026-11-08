@@ -3,7 +3,11 @@
 -- No executable patches, DLLs, or external helper processes.
 
 if FreeOxenAndHorses and FreeOxenAndHorses.loaded then return end
-FreeOxenAndHorses = { loaded = true }
+local scriptDirectory = assert(debug.getinfo(1, "S").source:match("^@(.*[\\/])"), "Cannot locate mod directory")
+local versionFile = assert(io.open(scriptDirectory .. "../VERSION", "r"))
+local VERSION = assert(versionFile:read("*a")):match("^%s*(.-)%s*$")
+versionFile:close()
+FreeOxenAndHorses = { loaded = true, version = VERSION }
 local MOD = "[FreeOxenAndHorses] "
 local FREE = { [13] = "Ox", [19] = "Horse" }
 local WEALTH_REASON = "not_enough_wealth"
@@ -167,4 +171,4 @@ FreeOxenAndHorses.refresh = function()
 end
 
 FreeOxenAndHorses.refresh()
-log("Loaded. Oxen and horse orders receive their normal purchase price as a temporary credit.")
+log("Loaded v" .. VERSION .. ". Oxen and horse orders receive their normal purchase price as a temporary credit.")

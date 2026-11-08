@@ -31,6 +31,7 @@ The result must be:
 Mods/
   FreeOxenAndHorses/
     enabled.txt
+    VERSION
     Scripts/
       main.lua
 ```
@@ -45,14 +46,22 @@ Close the game, remove `FreeOxenAndHorses` from the UE4SS Mods directory, and re
 
 Open [Actions](https://github.com/RillonDodgers/manor-lords-free-stable-purchases/actions), select a successful **Package mod** run, and download its `FreeOxenAndHorses-<version>.zip` artifact. Use that ZIP directly for Nexus Mods, Vortex, or manual installation.
 
-The workflow packages pushes to `main`, `v*` tags, and manual runs. Main-branch builds default to version `1.0.0`; manual runs accept a version, and tags such as `v1.0.1` use their tag version. The artifact contains only the two mod files shown above, without an extra ZIP wrapper.
+## Version and releases
 
-The repository root is the mod folder: `Scripts/` and `enabled.txt`, alongside this README and `.github/`. The packaging script at `.github/scripts/package.py` adds the `FreeOxenAndHorses/` install folder to the ZIP.
+Edit the root `VERSION` file to set the mod version. It is the single source for the mod's `FreeOxenAndHorses.version` value, startup log, ZIP filename, Actions artifact, Git tag, and GitHub release.
+
+Push a `VERSION` change to `main` to build the ZIP and publish a matching release automatically. For example, setting it to `1.0.1` produces `FreeOxenAndHorses-1.0.1.zip` and release/tag `v1.0.1`. Versions such as `1.0.1-beta.1` create prereleases. There is no separate workflow version input or manual tagging step.
+
+Manual workflow runs package the current `VERSION`. Existing releases are preserved; bump `VERSION` to publish a new release. Ordinary code or README commits do not publish a release until the version changes.
+
+The same ZIP is uploaded as the Actions artifact and release asset. It contains the three mod files shown above, without an extra ZIP wrapper. Published packages are also available under [Releases](https://github.com/RillonDodgers/manor-lords-free-stable-purchases/releases).
+
+The repository root is the mod folder: `Scripts/`, `enabled.txt`, and `VERSION`, alongside this README and `.github/`. The packaging script at `.github/scripts/package.py` adds the `FreeOxenAndHorses/` install folder to the ZIP.
 
 To package locally:
 
 ```sh
-python .github/scripts/package.py --version 1.0.0 --output-dir /path/to/output
+python .github/scripts/package.py --output-dir /path/to/output
 ```
 
 ## Troubleshooting
