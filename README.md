@@ -1,4 +1,4 @@
-# Free Stable Purchases
+# Free Oxen And Horses
 
 Buy oxen and horses from stables and hitching posts for **zero net regional wealth**.
 
@@ -43,9 +43,17 @@ Close the game, remove `FreeOxenAndHorses` from the UE4SS Mods directory, and re
 
 ## Download a package
 
-Open [Actions](https://github.com/RillonDodgers/manor-lords-free-stable-purchases/actions), select a successful **Package mod** run, and download its `FreeStablePurchases-<version>.zip` artifact. Use that ZIP directly for Nexus Mods, Vortex, or manual installation. GitHub's **Source code** archives are not the installable package.
+Open [Actions](https://github.com/RillonDodgers/manor-lords-free-stable-purchases/actions), select a successful **Package mod** run, and download its `FreeOxenAndHorses-<version>.zip` artifact. Use that ZIP directly for Nexus Mods, Vortex, or manual installation.
 
 The workflow packages pushes to `main`, `v*` tags, and manual runs. Main-branch builds default to version `1.0.0`; manual runs accept a version, and tags such as `v1.0.1` use their tag version. The artifact contains only the two mod files shown above, without an extra ZIP wrapper.
+
+The repository root is the mod folder: `Scripts/` and `enabled.txt`, alongside this README and `.github/`. The packaging script at `.github/scripts/package.py` adds the `FreeOxenAndHorses/` install folder to the ZIP.
+
+To package locally:
+
+```sh
+python .github/scripts/package.py --version 1.0.0 --output-dir /path/to/output
+```
 
 ## Troubleshooting
 

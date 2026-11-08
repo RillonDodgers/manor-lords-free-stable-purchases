@@ -26,34 +26,7 @@ jobs:
         id: package
         env:
           REQUESTED_VERSION: ${{ inputs.version }}
-        run: |
-          python3 - <<'PY'
-          import os
-          import pathlib
-          import re
-          import zipfile
-
-          if os.environ['GITHUB_REF_TYPE'] == 'tag':
-              version = os.environ['GITHUB_REF_NAME'].removeprefix('v')
-          else:
-              version = os.environ.get('REQUESTED_VERSION') or '1.0.0'
-          if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?', version):
-              raise SystemExit('Use a version such as 1.0.0 or 1.0.0-beta.1')
-
-          archive = pathlib.Path(f'FreeStablePurchases-{version}.zip')
-          files = [
-              pathlib.Path('FreeOxenAndHorses/Scripts/main.lua'),
-              pathlib.Path('FreeOxenAndHorses/enabled.txt'),
-          ]
-          with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as package:
-              for source in files:
-                  package.write(source, source.as_posix())
-          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
-              output.write(f'path={archive}\n')
-          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
-              summary.write(f'## {archive.name}\n\nDownload the artifact below. '
-                            'Upload this ZIP directly to Nexus Mods or install it through Vortex.\n')
-          PY
+        run: python3 .github/scripts/package.py --output-dir "$RUNNER_TEMP"
 
       - name: Upload installable ZIP
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
