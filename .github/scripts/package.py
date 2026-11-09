@@ -1,4 +1,4 @@
-"""Package Free Oxen And Horses for UE4SS, Vortex, and Nexus Mods."""
+"""Package Free Stable Purchases for UE4SS, Vortex, and Nexus Mods."""
 
 import argparse
 import os

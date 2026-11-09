@@ -20,7 +20,7 @@ def publish_release(archive: Path, version: str, repository: str, commit: str) -
         return
     command = [
         'gh', 'release', 'create', tag, str(archive), '--repo', repository,
-        '--target', commit, '--title', f'Free Oxen And Horses {version}', '--generate-notes',
+        '--target', commit, '--title', f'Free Stable Purchases {version}', '--generate-notes',
     ]
     if '-' in version:
         command.append('--prerelease')

@@ -1,4 +1,4 @@
-# Free Oxen And Horses
+# Free Stable Purchases
 
 Buy oxen and horses from stables and hitching posts for **zero net regional wealth**.
 
